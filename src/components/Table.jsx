@@ -237,7 +237,7 @@ const TableDisplay = () => {
                         rows={4}
                         sx={{ marginTop: "15px", width: "400px" }}
                       >
-                        gsadgaskgdaskglag
+                        placeholder
                       </TextField>
                     </Grid>
                   </Grid>
