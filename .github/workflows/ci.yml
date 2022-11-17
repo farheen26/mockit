@@ -16,8 +16,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - name: Installing dependencies
-        run: npm install
+      - name: npm install
+        env:
+          CI: false
+        run: |
+          npm ci 
       - name: Building project
         run: npm run build
       - name: Configure AWS Credentials
