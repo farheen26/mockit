@@ -41,7 +41,7 @@ const MockForm = () => {
       charset: charset,
       httpHeader: httpHeader,
       httpStatus: httpStatus,
-      response: httpResponseBody,
+      response: JSON.parse(httpResponseBody),
     };
     console.log("body in mock form", body);
 
@@ -54,12 +54,12 @@ const MockForm = () => {
       }
     );
 
-    // const data = response.data;
-    console.log("response data in mock form", response);
+    const data = response;
+    console.log("response data in mock form", data);
     // setLoading(false);
     // setData(response.data);
     // setPostAPI(data);
-    return response;
+    return data;
   };
 
   const handleChangeInput = (event) => {

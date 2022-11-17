@@ -121,9 +121,9 @@ const TableDisplay = () => {
         </TableHead>
 
         <TableBody>
-          {getAPI.GET &&
-            getAPI.GET.map((row) => (
-              <StyledTableRow key={row.apiName}>
+          {getAPI.POST &&
+            getAPI.POST.map((row) => (
+              <StyledTableRow key={row.name}>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.name}
                 </StyledTableCell>
@@ -179,7 +179,7 @@ const TableDisplay = () => {
                   <IconButton
                     onClick={() =>
                       window.open(
-                        "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/apiv?token=admin2022",
+                        "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
                         "_blank"
                       )
                     }
@@ -193,9 +193,9 @@ const TableDisplay = () => {
                 </StyledTableCell>
               </StyledTableRow>
             ))}
-          {getAPI.POST &&
-            getAPI.POST.map((row) => (
-              <StyledTableRow key={row.apiName}>
+          {getAPI.GET &&
+            getAPI.GET.map((row) => (
+              <StyledTableRow key={row.name}>
                 <StyledTableCell align="center" component="th" scope="row">
                   {row.name}
                 </StyledTableCell>
@@ -231,15 +231,7 @@ const TableDisplay = () => {
                         {row.contentType}
                       </Button>
                     </Grid>
-                    <Grid item>
-                      <TextField
-                        multiline
-                        rows={4}
-                        sx={{ marginTop: "15px", width: "400px" }}
-                      >
-                        placeholder
-                      </TextField>
-                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </StyledTableCell>
                 <StyledTableCell align="center">
@@ -249,7 +241,7 @@ const TableDisplay = () => {
                   <IconButton
                     onClick={() =>
                       window.open(
-                        "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/apiv?token=admin2022",
+                        "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
                         "_blank"
                       )
                     }
@@ -260,6 +252,7 @@ const TableDisplay = () => {
                   >
                     <OpenInNewIcon />
                   </IconButton>
+                  {row.path}
                 </StyledTableCell>
               </StyledTableRow>
             ))}
