@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import FiberNewIcon from "@mui/icons-material/FiberNew";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import createMock from "./../assets/createMock.png";
@@ -81,6 +83,15 @@ const CreateMock = () => {
                 justifyContent: "flex-end",
               }}
             >
+              {" "}
+              <ManageAccountsIcon
+                sx={{
+                  color: "inherit",
+                  marginRight: "3px",
+                  width: "30px",
+                  height: "30px",
+                }}
+              />
               MANAGE MY MOCKS
             </Button>
             <Button
@@ -92,7 +103,10 @@ const CreateMock = () => {
                 height: "40px",
               }}
             >
-              NEW MOCKS
+              <FiberNewIcon
+                sx={{ marginRight: "3px", width: "30px", height: "30px" }}
+              />{" "}
+              MOCKS
             </Button>
           </Grid>
         </Grid>

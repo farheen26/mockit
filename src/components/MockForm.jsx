@@ -10,7 +10,16 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
-import Snackbar from "./Snackbar";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+
+import Snackbar from "@mui/material/Snackbar";
+
+import Grow from "@mui/material/Grow";
+import Fade from "@mui/material/Fade";
+
+const GrowTransition = (props) => {
+  return <Grow {...props} />;
+};
 
 const MockForm = () => {
   const [value, setValue] = React.useState("");
@@ -22,6 +31,32 @@ const MockForm = () => {
   const [httpResponseBody, setHttpResponseBody] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(null);
+
+  const [state, setState] = React.useState({
+    open: false,
+    Transition: Fade,
+    vertical: "top",
+    horizontal: "right",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClick = (Transition) => {
+    console.log("farheen");
+    setState({
+      open: true,
+      vertical: "top",
+      horizontal: "right",
+      Transition,
+    });
+  };
+
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
 
   console.log("name", name);
   console.log("httpResponseBody123456", httpResponseBody);
@@ -55,8 +90,12 @@ const MockForm = () => {
     );
 
     const data = response;
+
     console.log("response data in mock form", data);
-    // setLoading(false);
+    if (data) {
+      setLoading(false);
+    }
+
     // setData(response.data);
     // setPostAPI(data);
     return data;
@@ -93,6 +132,17 @@ const MockForm = () => {
 
   return (
     <div>
+      <Snackbar
+        open={state.open}
+        onClose={handleClose}
+        sx={{ backgroundColor: "green" }}
+        key={vertical + horizontal + state.Transition.name}
+        anchorOrigin={{ vertical, horizontal }}
+        TransitionComponent={state.Transition}
+        message="Virtualized api has been genertaed!"
+        utoHideDuration={3000}
+      />
+
       <Box
         sx={{
           backgroundColor: "#b3e0d3",
@@ -291,6 +341,7 @@ const MockForm = () => {
           <Button
             onClick={() => {
               handleGenerateResponse();
+              handleClick(GrowTransition);
             }}
             sx={{
               marginTop: "20px",
@@ -303,6 +354,7 @@ const MockForm = () => {
             variant="contained"
           >
             GENERATE MY HTTP RESPONSE
+            <RocketLaunchIcon sx={{ marginLeft: "3px" }} />
           </Button>
         </Grid>
       </Box>
