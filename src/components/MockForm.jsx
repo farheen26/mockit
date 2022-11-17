@@ -10,18 +10,13 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-
-import Snackbar from "@mui/material/Snackbar";
-
-import Grow from "@mui/material/Grow";
-import Fade from "@mui/material/Fade";
-
-const GrowTransition = (props) => {
-  return <Grow {...props} />;
-};
+import Snackbar from "./Snackbar";
+import Swal from 'sweetalert2'
+import { useNavigate } from "react-router-dom";
 
 const MockForm = () => {
+  const navigate = useNavigate();
+
   const [value, setValue] = React.useState("");
   const [httpStatus, sethttpStatus] = React.useState("");
   const [name, setName] = React.useState("");
@@ -66,36 +61,77 @@ const MockForm = () => {
     "Content-Type": "application/json",
   };
 
-  const handleGenerateResponse = async () => {
-    console.log("generate HTTP response");
-    // event.preventDefault();
-    const body = {
-      name: name,
-      method: "get",
-      contentType: contentType,
-      charset: charset,
-      httpHeader: httpHeader,
-      httpStatus: httpStatus,
-      response: JSON.parse(httpResponseBody),
-    };
-    console.log("body in mock form", body);
-
-    const response = await axios.post(
-      `${url}`,
-      { body },
-
-      {
-        headers: headers,
-      }
-    );
-
-    const data = response;
-
-    console.log("response data in mock form", data);
-    if (data) {
-      setLoading(false);
+  const formValidation = () => {
+    let requiredFields = []
+    if(httpStatus === "") {
+      requiredFields.push("HTTP Status")
     }
 
+    if(name === "") {
+      requiredFields.push("Mock Identifier")
+    }
+
+    if(contentType === "") {
+      requiredFields.push("Response Content Type")
+    }
+
+    if(charset === "") {
+      requiredFields.push("Charset")
+    }
+
+    if(httpResponseBody === "") {
+      requiredFields.push("HTTP Response Body")
+    }
+
+
+    if(requiredFields.length === 0) {
+      return "success"
+    } else {
+      if(requiredFields.length === 1) {
+        return `${requiredFields.join(", ")} is required`
+      } else {
+        return `${requiredFields.join(", ")} are required`
+      }
+    }
+    
+  }
+  const handleGenerateResponse = async () => {
+    console.log("generate HTTP response");
+
+    let message = formValidation();
+    if(message !== "success") {
+      Swal.fire({
+        title: 'Oops!',
+        text: message,
+        icon: 'error',
+        confirmButtonText: 'Cool'
+      })
+    } else {
+      // event.preventDefault();
+      setLoading(true)
+      const body = {
+        name: name,
+        method: "get",
+        contentType: contentType,
+        charset: charset,
+        httpHeader: httpHeader,
+        httpStatus: httpStatus,
+        response: JSON.parse(httpResponseBody),
+      };
+      console.log("body in mock form", body);
+
+      const response = await axios.post(
+        `${url}`,
+        { body },
+
+        {
+          headers: headers,
+        }
+      );
+
+    const data = response;
+    console.log("response data in mock form", data);
+    // setLoading(false);
     // setData(response.data);
     // setPostAPI(data);
     return data;
@@ -121,14 +157,31 @@ const MockForm = () => {
   };
 
   const handleChangeHttpHeader = (event) => {
-    setHttpHeader(event.target.value);
-    console.log("HttpHeader");
+    try {
+      var obj = JSON.parse(event.target.value);
+      var pretty = JSON.stringify(obj, undefined, 4);
+      setHttpHeader(pretty);
+      console.log("HttpHeader");
+    } catch (e) {
+      setHttpHeader(event.target.value);
+      console.log("HttpHeader not json");
+    }
   };
 
   const handleChangeHttpResponseBody = (event) => {
-    setHttpResponseBody(event.target.value);
-    console.log("HttpResponseBody");
+    try {
+      var obj = JSON.parse(event.target.value);
+      var pretty = JSON.stringify(obj, undefined, 4);
+      setHttpResponseBody(pretty);
+      console.log("HttpResponseBody");
+    } catch (e) {
+      setHttpResponseBody(event.target.value);
+      console.log("HttpResponseBody not json");
+    }
+    
   };
+
+
 
   return (
     <div>
@@ -327,7 +380,7 @@ const MockForm = () => {
                 label="JSON Format"
                 multiline
                 rows={7}
-                valu={httpResponseBody}
+                value={httpResponseBody}
                 onChange={handleChangeHttpResponseBody}
                 sx={{
                   background: "#ECECEC",
@@ -343,6 +396,7 @@ const MockForm = () => {
               handleGenerateResponse();
               handleClick(GrowTransition);
             }}
+            disabled={loading}
             sx={{
               marginTop: "20px",
               height: "50px",
@@ -354,10 +408,10 @@ const MockForm = () => {
             variant="contained"
           >
             GENERATE MY HTTP RESPONSE
-            <RocketLaunchIcon sx={{ marginLeft: "3px" }} />
           </Button>
         </Grid>
       </Box>
+      
     </div>
   );
 };
