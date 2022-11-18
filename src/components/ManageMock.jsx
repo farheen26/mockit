@@ -21,7 +21,6 @@ const ManageMock = () => {
       sx={{
         marginLeft: 1,
         marginRight: 1,
-        //width: 1363,
         height: "auto",
         backgroundColor: "#f0f8ff",
       }}
@@ -35,11 +34,15 @@ const ManageMock = () => {
           paddingTop: "40px",
           paddingBottom: "0px",
           height: "150px",
-          borderRadius: "12px",
+          borderRadius: "12px"
         }}
       >
-        <Grid container direction="row">
-          <Grid item>
+        <Grid container direction="row" sx={{
+          display: "flex",
+          alignItems: "flex-start",
+          justifyContent: "space-between"
+          }}>
+          <Grid item sx={{ display: "flex", justifyContent: "center" }}>
             <img
               src={rocket}
               alt="manage"
@@ -60,7 +63,6 @@ const ManageMock = () => {
               sx={{
                 fontFamily: "system-ui",
                 fontSize: "30px",
-                paddingLeft: "470px",
                 marginTop: "36px",
               }}
             >
@@ -70,7 +72,7 @@ const ManageMock = () => {
           <Grid item sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               variant="outlined"
-              sx={{ marginLeft: "266px", height: "40px", marginTop: "40px" }}
+              sx={{ height: "40px", marginTop: "40px" }}
             >
               {" "}
               <ManageAccountsIcon
