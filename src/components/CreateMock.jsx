@@ -10,6 +10,7 @@ import FiberNewIcon from "@mui/icons-material/FiberNew";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import createMock from "./../assets/createMock.png";
+import rocket from "./../assets/rocket-png-40797.png";
 import MockForm from "./MockForm";
 
 const CreateMock = () => {
@@ -35,20 +36,20 @@ const CreateMock = () => {
         sx={{
           marginTop: 2,
           backgroundColor: "white",
-          paddingTop: "40px",
+          paddingTop: "30px",
           paddingBottom: "0px",
-          height: "80px",
+          height: "150px",
           borderRadius: "12px",
         }}
       >
         <Grid container direction="row">
           <Grid item>
             <img
-              src={createMock}
+              src={rocket}
               alt="manage"
               style={{
-                width: "140px",
-                height: "80px",
+                width: "120px",
+                height: "120px",
                 marginLeft: "20px",
               }}
             />
@@ -66,6 +67,7 @@ const CreateMock = () => {
                 paddingLeft: "490px",
                 display: "flex",
                 justifyContent: "center",
+                marginTop: "36px",
               }}
             >
               Design your mocks
@@ -79,6 +81,7 @@ const CreateMock = () => {
               variant="outlined"
               sx={{
                 marginLeft: "300px",
+                marginTop: "40px",
                 height: "40px",
                 display: "flex",
                 justifyContent: "flex-end",
@@ -102,6 +105,7 @@ const CreateMock = () => {
                 justifyContent: "flex-end",
                 marginLeft: "10px",
                 height: "40px",
+                marginTop: "40px",
               }}
             >
               <FiberNewIcon

@@ -7,7 +7,7 @@ import FiberNewIcon from "@mui/icons-material/FiberNew";
 import TableDisplay from "./../components/Table";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
-import createMock from "./../assets/createMock.png";
+import rocket from "./../assets/rocket-png-40797.png";
 import { useNavigate } from "react-router-dom";
 
 const ManageMock = () => {
@@ -34,18 +34,18 @@ const ManageMock = () => {
           backgroundColor: "white",
           paddingTop: "40px",
           paddingBottom: "0px",
-          height: "80px",
+          height: "150px",
           borderRadius: "12px",
         }}
       >
         <Grid container direction="row">
           <Grid item>
             <img
-              src={createMock}
+              src={rocket}
               alt="manage"
               style={{
-                width: "140px",
-                height: "80px",
+                width: "120px",
+                height: "120px",
                 marginLeft: "20px",
               }}
             />
@@ -61,6 +61,7 @@ const ManageMock = () => {
                 fontFamily: "system-ui",
                 fontSize: "30px",
                 paddingLeft: "470px",
+                marginTop: "36px",
               }}
             >
               Manage your mocks
@@ -69,7 +70,7 @@ const ManageMock = () => {
           <Grid item sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               variant="outlined"
-              sx={{ marginLeft: "266px", height: "40px" }}
+              sx={{ marginLeft: "266px", height: "40px", marginTop: "40px" }}
             >
               {" "}
               <ManageAccountsIcon
@@ -84,7 +85,7 @@ const ManageMock = () => {
             </Button>
             <Button
               variant="contained"
-              sx={{ marginLeft: "10px", height: "40px" }}
+              sx={{ marginLeft: "10px", height: "40px", marginTop: "40px" }}
               onClick={() => {
                 handleNewMocks();
               }}
