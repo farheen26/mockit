@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
-
+import BuildIcon from "@mui/icons-material/Build";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import createMock from "./../assets/createMock.png";
@@ -80,7 +80,7 @@ const CreateMock = () => {
               }}
               variant="outlined"
               sx={{
-                marginLeft: "300px",
+                marginLeft: "200px", //300px if beta button is removed,
                 marginTop: "40px",
                 height: "40px",
                 display: "flex",
@@ -112,6 +112,22 @@ const CreateMock = () => {
                 sx={{ marginRight: "3px", width: "30px", height: "30px" }}
               />{" "}
               MOCKS
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginLeft: "10px",
+                height: "40px",
+                marginTop: "40px",
+                backgroundColor: "#702963",
+              }}
+            >
+              <BuildIcon
+                sx={{ marginRight: "3px", width: "30px", height: "23px" }}
+              />{" "}
+              BETA
             </Button>
           </Grid>
         </Grid>
