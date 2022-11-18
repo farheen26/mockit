@@ -143,10 +143,11 @@ const MockForm = () => {
   const handleChangeInput = async (event) => {
     console.log("event", event.target.value);
     setName(event.target.value);
-    // if (event.target.value.length === 5) {
-    //   let response = await openAIService(event.target.value);
-    //   console.log("openAIresponse", response);
-    // }
+    if (event.target.value.length === 5) {
+      console.log("calling openAIService")
+      let response = await openAIService(event.target.value);
+      console.log("openAIresponse", response);
+    }
   };
 
   const handleChangeHttpStatus = (event) => {

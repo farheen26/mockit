@@ -1,7 +1,7 @@
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: "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",
 });
 const openai = new OpenAIApi(configuration);
 
@@ -20,6 +20,7 @@ const openai = new OpenAIApi(configuration);
 // console.log("response", response);
 
 const openAIService = async (promptText) => {
+  console.log("openAIService invoked >>> promptText", promptText)
   const response = await openai.createCompletion({
     model: "text-davinci-002",
     prompt: promptText,

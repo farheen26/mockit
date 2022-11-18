@@ -7,12 +7,12 @@ import rocket from "./../assets/pngfind.com-rocketship-png-2134284.png";
 
 const LandingContent = () => {
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} alignItems="center"
+    justifyContent="center">
       <Grid item sx={6}>
         <Paper
           elevation={4}
           sx={{
-            marginLeft: "155px",
             marginTop: "70px",
             padding: "30px",
             height: "250px",
@@ -52,7 +52,7 @@ const LandingContent = () => {
         <img
           src={rocket}
           alt="rocket image"
-          style={{ height: "450px", marginLeft: "130px", marginBottom: "40px" }}
+          style={{ height: "450px", marginLeft: "0px", marginTop: "70px" }}
         />
       </Grid>
     </Grid>
