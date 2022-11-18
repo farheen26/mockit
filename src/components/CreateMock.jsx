@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
+
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import createMock from "./../assets/createMock.png";
@@ -61,8 +62,8 @@ const CreateMock = () => {
             <Typography
               sx={{
                 fontFamily: "system-ui",
-                fontSize: "23px",
-                paddingLeft: "530px",
+                fontSize: "30px",
+                paddingLeft: "450px",
                 display: "flex",
                 justifyContent: "center",
               }}

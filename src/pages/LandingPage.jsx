@@ -10,8 +10,11 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import LandingContent from "./LandingContent";
+import Footer from "../components/Footer";
+import "./../pages/Landing.css";
 
-const Header = () => {
+const Landing = () => {
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -53,7 +56,7 @@ const Header = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <RocketLaunchIcon sx={{ color: "	#006666" }} />
+            <RocketLaunchIcon sx={{ color: "#006666" }} />
           </IconButton>
 
           <Typography
@@ -69,6 +72,7 @@ const Header = () => {
           >
             <b>MOCKIT</b>
           </Typography>
+
           {auth && (
             <div>
               <IconButton
@@ -102,9 +106,21 @@ const Header = () => {
             </div>
           )}
         </Toolbar>
+        <Box sx={{ height: "200px" }}>
+          <div class="text-box">
+            <h1 class="heading-primary">
+              <span class="heading-primary-main">MOCKIT</span>
+              <span class="heading-primary-sub">
+                Fastest way to mock your APIs
+              </span>
+            </h1>
+          </div>
+        </Box>
       </Box>
+      <LandingContent />
+      <Footer />
     </Box>
   );
 };
 
-export default Header;
+export default Landing;

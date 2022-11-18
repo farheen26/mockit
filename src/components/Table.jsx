@@ -14,6 +14,7 @@ import { TextField, Typography } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
+import Spinner from "./Spinner";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -98,167 +99,200 @@ const TableDisplay = () => {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ marginTop: 2, marginLeft: "0px" }}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Name
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Method
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Description
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Date
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Actions
-            </StyledTableCell>
-          </TableRow>
-        </TableHead>
+    <>
+      {!loading ? (
+        <Spinner />
+      ) : (
+        <TableContainer
+          component={Paper}
+          sx={{ marginTop: 2, marginLeft: "0px", height: "365px" }}
+        >
+          <Table
+            stickyHeader
+            sx={{ minWidth: 700 }}
+            aria-label="customized table"
+          >
+            <TableHead>
+              <TableRow>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Name
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Method
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Description
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Date
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Actions
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
 
-        <TableBody>
-          {getAPI.POST &&
-            getAPI.POST.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.method}</StyledTableCell>
-                <StyledTableCell align="center">
-                  <Grid container direction="column">
-                    <Grid item direction="row">
-                      {" "}
-                      <Button
-                        variant="contained"
-                        sx={{ height: "20px", background: "black" }}
+            <TableBody>
+              {getAPI.POST &&
+                getAPI.POST.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell align="center" component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.method}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Grid container direction="column">
+                        <Grid item direction="row">
+                          {" "}
+                          <Button
+                            variant="contained"
+                            sx={{ height: "20px", background: "black" }}
+                          >
+                            <Typography>{row.httpStatus}</Typography>
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              background: "#05998C",
+                              marginLeft: "2px",
+                              height: "20px",
+                            }}
+                          >
+                            {row.charset}
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              background: "#E88504",
+                              marginLeft: "2px",
+                              height: "20px",
+                            }}
+                          >
+                            {row.contentType}
+                            {row.httpResponseBody}
+                          </Button>
+                        </Grid>
+                        <Grid item>
+                          <TextField
+                            multiline
+                            rows={4}
+                            sx={{ marginTop: "15px", width: "400px" }}
+                            value={row.httpResponseBody}
+                          >
+                            {row.httpResponseBody}
+                          </TextField>
+                        </Grid>
+                      </Grid>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      Created on {row.date}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <IconButton
+                        onClick={() =>
+                          window.open(
+                            "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
+                            "_blank"
+                          )
+                        }
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
                       >
-                        <Typography>{row.httpStatus}</Typography>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          background: "#05998C",
-                          marginLeft: "2px",
-                          height: "20px",
-                        }}
+                        <OpenInNewIcon />
+                      </IconButton>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              {getAPI.GET &&
+                getAPI.GET.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell align="center" component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      {row.method}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <Grid container direction="column">
+                        <Grid item direction="row">
+                          {" "}
+                          <Button
+                            variant="contained"
+                            sx={{ height: "20px", background: "black" }}
+                          >
+                            <Typography>{row.httpStatus}</Typography>
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              background: "#05998C",
+                              marginLeft: "2px",
+                              height: "20px",
+                            }}
+                          >
+                            {row.charset}
+                          </Button>
+                          <Button
+                            variant="contained"
+                            sx={{
+                              background: "#E88504",
+                              marginLeft: "2px",
+                              height: "20px",
+                            }}
+                          >
+                            {row.contentType}
+                          </Button>
+                        </Grid>
+                        <Grid item></Grid>
+                      </Grid>
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      Created on {row.date}
+                    </StyledTableCell>
+                    <StyledTableCell align="center">
+                      <IconButton
+                        onClick={() =>
+                          window.open(
+                            "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
+                            "_blank"
+                          )
+                        }
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
                       >
-                        {row.charset}
-                      </Button>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          background: "#E88504",
-                          marginLeft: "2px",
-                          height: "20px",
-                        }}
-                      >
-                        {row.contentType}
-                        {row.httpResponseBody}
-                      </Button>
-                    </Grid>
-                    <Grid item>
-                      <TextField
-                        multiline
-                        rows={4}
-                        sx={{ marginTop: "15px", width: "400px" }}
-                        value={row.httpResponseBody}
-                      >
-                        {row.httpResponseBody}
-                      </TextField>
-                    </Grid>
-                  </Grid>
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  Created on {row.date}
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <IconButton
-                    onClick={() =>
-                      window.open(
-                        "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
-                        "_blank"
-                      )
-                    }
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                  >
-                    <OpenInNewIcon />
-                  </IconButton>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          {getAPI.GET &&
-            getAPI.GET.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell align="center">{row.method}</StyledTableCell>
-                <StyledTableCell align="center">
-                  <Grid container direction="column">
-                    <Grid item direction="row">
-                      {" "}
-                      <Button
-                        variant="contained"
-                        sx={{ height: "20px", background: "black" }}
-                      >
-                        <Typography>{row.httpStatus}</Typography>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          background: "#05998C",
-                          marginLeft: "2px",
-                          height: "20px",
-                        }}
-                      >
-                        {row.charset}
-                      </Button>
-                      <Button
-                        variant="contained"
-                        sx={{
-                          background: "#E88504",
-                          marginLeft: "2px",
-                          height: "20px",
-                        }}
-                      >
-                        {row.contentType}
-                      </Button>
-                    </Grid>
-                    <Grid item></Grid>
-                  </Grid>
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  Created on {row.date}
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  <IconButton
-                    onClick={() =>
-                      window.open(
-                        "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
-                        "_blank"
-                      )
-                    }
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                  >
-                    <OpenInNewIcon />
-                  </IconButton>
-                  {row.path}
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                        <OpenInNewIcon />
+                      </IconButton>
+                      {row.path}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      ,
+    </>
   );
 };
 

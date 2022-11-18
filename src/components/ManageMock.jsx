@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import FiberNewIcon from "@mui/icons-material/FiberNew";
 import TableDisplay from "./../components/Table";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
@@ -57,8 +59,8 @@ const ManageMock = () => {
             <Typography
               sx={{
                 fontFamily: "system-ui",
-                fontSize: "23px",
-                paddingLeft: "330px",
+                fontSize: "30px",
+                paddingLeft: "520px",
               }}
             >
               Manage your mocks
@@ -69,6 +71,15 @@ const ManageMock = () => {
               variant="outlined"
               sx={{ marginLeft: "220px", height: "40px" }}
             >
+              {" "}
+              <ManageAccountsIcon
+                sx={{
+                  color: "inherit",
+                  marginRight: "3px",
+                  width: "30px",
+                  height: "30px",
+                }}
+              />
               MANAGE MY MOCKS
             </Button>
             <Button
@@ -78,6 +89,10 @@ const ManageMock = () => {
                 handleNewMocks();
               }}
             >
+              {" "}
+              <FiberNewIcon
+                sx={{ marginRight: "3px", width: "30px", height: "30px" }}
+              />
               NEW MOCKS
             </Button>
           </Grid>

@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+import Spinner from "./Spinner";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,6 +42,9 @@ const TableTest = () => {
   };
 
   const [getAPI, setGetAPI] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  console.log("loading", loading);
 
   console.log("getAPI", getAPI);
 
@@ -59,49 +63,72 @@ const TableTest = () => {
     console.log("response in ui app", response.data);
     const data = response.data;
     setGetAPI(data);
+    setLoading(true);
     return data;
   };
 
   return (
-    <TableContainer
-      component={Paper}
-      sx={{ marginTop: 2, width: "1100px", marginLeft: "80px" }}
-    >
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Name
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Path
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Description
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Date
-            </StyledTableCell>
-            <StyledTableCell align="center" sx={{ fontFamily: "system-ui" }}>
-              Actions
-            </StyledTableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {getAPI.GET &&
-            getAPI.GET.map((row) => (
-              <StyledTableRow key={row.name}>
-                <StyledTableCell align="center" component="th" scope="row">
-                  {row.name}
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <TableContainer
+          component={Paper}
+          sx={{ marginTop: 2, width: "1100px", marginLeft: "80px" }}
+        >
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Name
                 </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Path
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Description
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Date
+                </StyledTableCell>
+                <StyledTableCell
+                  align="center"
+                  sx={{ fontFamily: "system-ui" }}
+                >
+                  Actions
+                </StyledTableCell>
+              </TableRow>
+            </TableHead>
 
-                <StyledTableCell align="center">{row.path}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            <TableBody>
+              {getAPI.GET &&
+                getAPI.GET.map((row) => (
+                  <StyledTableRow key={row.name}>
+                    <StyledTableCell align="center" component="th" scope="row">
+                      {row.name}
+                    </StyledTableCell>
+
+                    <StyledTableCell align="center">{row.path}</StyledTableCell>
+                  </StyledTableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      ,
+    </>
   );
 };
 

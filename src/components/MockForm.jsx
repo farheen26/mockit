@@ -11,7 +11,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import InputLabel from "@mui/material/InputLabel";
 import Snackbar from "./Snackbar";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import FiberNewIcon from "@mui/icons-material/FiberNew";
+import openAIService from "./file";
 import { useNavigate } from "react-router-dom";
 
 const MockForm = () => {
@@ -27,32 +32,6 @@ const MockForm = () => {
   const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState(null);
 
-  const [state, setState] = React.useState({
-    open: false,
-    Transition: Fade,
-    vertical: "top",
-    horizontal: "right",
-  });
-
-  const { vertical, horizontal, open } = state;
-
-  const handleClick = (Transition) => {
-    console.log("farheen");
-    setState({
-      open: true,
-      vertical: "top",
-      horizontal: "right",
-      Transition,
-    });
-  };
-
-  const handleClose = () => {
-    setState({
-      ...state,
-      open: false,
-    });
-  };
-
   console.log("name", name);
   console.log("httpResponseBody123456", httpResponseBody);
   const url =
@@ -62,53 +41,51 @@ const MockForm = () => {
   };
 
   const formValidation = () => {
-    let requiredFields = []
-    if(httpStatus === "") {
-      requiredFields.push("HTTP Status")
+    let requiredFields = [];
+    if (httpStatus === "") {
+      requiredFields.push("HTTP Status");
     }
 
-    if(name === "") {
-      requiredFields.push("Mock Identifier")
+    if (name === "") {
+      requiredFields.push("Mock Identifier");
     }
 
-    if(contentType === "") {
-      requiredFields.push("Response Content Type")
+    if (contentType === "") {
+      requiredFields.push("Response Content Type");
     }
 
-    if(charset === "") {
-      requiredFields.push("Charset")
+    if (charset === "") {
+      requiredFields.push("Charset");
     }
 
-    if(httpResponseBody === "") {
-      requiredFields.push("HTTP Response Body")
+    if (httpResponseBody === "") {
+      requiredFields.push("HTTP Response Body");
     }
 
-
-    if(requiredFields.length === 0) {
-      return "success"
+    if (requiredFields.length === 0) {
+      return "success";
     } else {
-      if(requiredFields.length === 1) {
-        return `${requiredFields.join(", ")} is required`
+      if (requiredFields.length === 1) {
+        return `${requiredFields.join(", ")} is required`;
       } else {
-        return `${requiredFields.join(", ")} are required`
+        return `${requiredFields.join(", ")} are required`;
       }
     }
-    
-  }
+  };
   const handleGenerateResponse = async () => {
     console.log("generate HTTP response");
 
     let message = formValidation();
-    if(message !== "success") {
+    if (message !== "success") {
       Swal.fire({
-        title: 'Oops!',
+        title: "Oops!",
         text: message,
-        icon: 'error',
-        confirmButtonText: 'Cool'
-      })
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
     } else {
       // event.preventDefault();
-      setLoading(true)
+      setLoading(true);
       const body = {
         name: name,
         method: "get",
@@ -129,17 +106,47 @@ const MockForm = () => {
         }
       );
 
-    const data = response;
-    console.log("response data in mock form", data);
-    // setLoading(false);
-    // setData(response.data);
-    // setPostAPI(data);
-    return data;
+      const data = response;
+      console.log("response data in mock form", data);
+      // setLoading(false);
+      // setData(response.data);
+      // setPostAPI(data);
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "center-center",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: "Generated mock successfully!",
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        //if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("SUCCESS THEN", result);
+        console.log("I was closed by the timer");
+        navigate("/manage-mock");
+        //}
+      });
+
+      return data;
+    }
   };
 
-  const handleChangeInput = (event) => {
+  const handleChangeInput = async (event) => {
     console.log("event", event.target.value);
     setName(event.target.value);
+    // if (event.target.value.length === 5) {
+    //   let response = await openAIService(event.target.value);
+    //   console.log("openAIresponse", response);
+    // }
   };
 
   const handleChangeHttpStatus = (event) => {
@@ -178,24 +185,10 @@ const MockForm = () => {
       setHttpResponseBody(event.target.value);
       console.log("HttpResponseBody not json");
     }
-    
   };
-
-
 
   return (
     <div>
-      <Snackbar
-        open={state.open}
-        onClose={handleClose}
-        sx={{ backgroundColor: "green" }}
-        key={vertical + horizontal + state.Transition.name}
-        anchorOrigin={{ vertical, horizontal }}
-        TransitionComponent={state.Transition}
-        message="Virtualized api has been genertaed!"
-        utoHideDuration={3000}
-      />
-
       <Box
         sx={{
           backgroundColor: "#b3e0d3",
@@ -394,7 +387,6 @@ const MockForm = () => {
           <Button
             onClick={() => {
               handleGenerateResponse();
-              handleClick(GrowTransition);
             }}
             disabled={loading}
             sx={{
@@ -407,11 +399,11 @@ const MockForm = () => {
             }}
             variant="contained"
           >
-            GENERATE MY HTTP RESPONSE
+            {loading ? "SAVING...." : "GENERATE MY HTTP RESPONSE"}
+            <RocketLaunchIcon sx={{ marginLeft: "3px" }} />
           </Button>
         </Grid>
       </Box>
-      
     </div>
   );
 };
