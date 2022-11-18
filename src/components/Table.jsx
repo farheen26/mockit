@@ -37,35 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const rows1 = [
-  {
-    apiName: "api1",
-    desc: "200",
-    content: "application/json",
-    date: "2022-10-22",
-    action: "del",
-    method: "GET",
-    charset: "UTF-8",
-  },
-  {
-    apiName: "api2",
-    desc: "200",
-    date: "2022-10-22",
-    action: "del",
-    method: "GET",
-    content: "application/json",
-    charset: "UTF-8",
-  },
-  {
-    apiName: "api3",
-    desc: "200",
-    date: "2022-10-22",
-    action: "del",
-    method: "GET",
-    content: "application/json",
-    charset: "UTF-8",
-  },
-];
+
 
 const TableDisplay = () => {
   const url =
@@ -105,7 +77,7 @@ const TableDisplay = () => {
       ) : (
         <TableContainer
           component={Paper}
-          sx={{ marginTop: 2, marginLeft: "0px", height: "365px" }}
+          sx={{ marginTop: 2, marginLeft: "0px" }}
         >
           <Table
             stickyHeader
@@ -272,7 +244,7 @@ const TableDisplay = () => {
                       <IconButton
                         onClick={() =>
                           window.open(
-                            "https://77fxp09s04.execute-api.us-east-1.amazonaws.com/api/public/111/cakes?token=admin2022",
+                            row.path,
                             "_blank"
                           )
                         }
@@ -283,7 +255,7 @@ const TableDisplay = () => {
                       >
                         <OpenInNewIcon />
                       </IconButton>
-                      {row.path}
+                      <a href={row.path} target="_blank" rel="noreferrer" class="link">Try it now</a>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -291,7 +263,6 @@ const TableDisplay = () => {
           </Table>
         </TableContainer>
       )}
-      ,
     </>
   );
 };

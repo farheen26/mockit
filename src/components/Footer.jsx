@@ -5,7 +5,8 @@ import { Typography } from "@mui/material";
 
 const Footer = () => {
   return (
-    <Box sx={{ background: "bebebe", height: "70px", marginTop: "30px" }}>
+    <Box sx={{ background: "bebebe", height: "150px", marginTop: "10px",display: "flex", alignItems: "center",
+    justifyContent: "center" }}>
       <Typography
         sx={{
           display: "flex",
