@@ -63,7 +63,7 @@ const CreateMock = () => {
               sx={{
                 fontFamily: "system-ui",
                 fontSize: "30px",
-                paddingLeft: "450px",
+                paddingLeft: "490px",
                 display: "flex",
                 justifyContent: "center",
               }}
@@ -78,7 +78,7 @@ const CreateMock = () => {
               }}
               variant="outlined"
               sx={{
-                marginLeft: "350px",
+                marginLeft: "300px",
                 height: "40px",
                 display: "flex",
                 justifyContent: "flex-end",

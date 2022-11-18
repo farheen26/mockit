@@ -60,7 +60,7 @@ const ManageMock = () => {
               sx={{
                 fontFamily: "system-ui",
                 fontSize: "30px",
-                paddingLeft: "520px",
+                paddingLeft: "470px",
               }}
             >
               Manage your mocks
@@ -69,7 +69,7 @@ const ManageMock = () => {
           <Grid item sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button
               variant="outlined"
-              sx={{ marginLeft: "220px", height: "40px" }}
+              sx={{ marginLeft: "266px", height: "40px" }}
             >
               {" "}
               <ManageAccountsIcon
