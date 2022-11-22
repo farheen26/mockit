@@ -20,6 +20,10 @@ const CreateMock = () => {
     navigate("/manage-mock");
   };
 
+  const handleBeta = () => {
+    navigate("/beta");
+  };
+
   return (
     <Box
       sx={{
@@ -115,6 +119,7 @@ const CreateMock = () => {
             </Button>
             <Button
               variant="contained"
+              onClick={handleBeta}
               sx={{
                 display: "flex",
                 justifyContent: "flex-end",

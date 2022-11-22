@@ -8,6 +8,7 @@ import TableDisplay from "./../components/Table";
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
 import rocket from "./../assets/rocket-png-40797.png";
+import IosShareIcon from "@mui/icons-material/IosShare";
 import { useNavigate } from "react-router-dom";
 
 const ManageMock = () => {
@@ -34,14 +35,18 @@ const ManageMock = () => {
           paddingTop: "40px",
           paddingBottom: "0px",
           height: "150px",
-          borderRadius: "12px"
+          borderRadius: "12px",
         }}
       >
-        <Grid container direction="row" sx={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "space-between"
-          }}>
+        <Grid
+          container
+          direction="row"
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+          }}
+        >
           <Grid item sx={{ display: "flex", justifyContent: "center" }}>
             <img
               src={rocket}
@@ -64,6 +69,7 @@ const ManageMock = () => {
                 fontFamily: "system-ui",
                 fontSize: "30px",
                 marginTop: "36px",
+                paddingLeft: "110px",
               }}
             >
               Manage your mocks
@@ -97,6 +103,25 @@ const ManageMock = () => {
                 sx={{ marginRight: "3px", width: "30px", height: "30px" }}
               />
               NEW MOCKS
+            </Button>
+            <Button
+              //variant="contained"
+              sx={{
+                marginLeft: "10px",
+                height: "40px",
+                marginTop: "40px",
+                color: "white",
+                backgroundColor: "#265828",
+              }}
+              onClick={() => {
+                handleNewMocks();
+              }}
+            >
+              {" "}
+              <IosShareIcon
+                sx={{ marginRight: "3px", width: "30px", height: "30px" }}
+              />
+              EXPORT
             </Button>
           </Grid>
         </Grid>

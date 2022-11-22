@@ -14,6 +14,8 @@ import { TextField, Typography } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import IconButton from "@mui/material/IconButton";
 import Grid from "@mui/material/Grid";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import Spinner from "./Spinner";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -36,8 +38,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-
 
 const TableDisplay = () => {
   const url =
@@ -242,12 +242,7 @@ const TableDisplay = () => {
                     </StyledTableCell>
                     <StyledTableCell align="center">
                       <IconButton
-                        onClick={() =>
-                          window.open(
-                            row.path,
-                            "_blank"
-                          )
-                        }
+                        onClick={() => window.open(row.path, "_blank")}
                         edge="start"
                         color="inherit"
                         aria-label="menu"
@@ -255,7 +250,31 @@ const TableDisplay = () => {
                       >
                         <OpenInNewIcon />
                       </IconButton>
-                      <a href={row.path} target="_blank" rel="noreferrer" class="link">Try it now</a>
+                      {/* <a
+                        href={row.path}
+                        target="_blank"
+                        rel="noreferrer"
+                        class="link"
+                      >
+                        Try it now
+                      </a> */}
+
+                      <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2, color: "grey" }}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2, color: "grey" }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
